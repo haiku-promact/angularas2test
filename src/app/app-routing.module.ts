@@ -6,13 +6,16 @@ import { RouterModule } from "@angular/router";
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EmployeeEditComponent } from "./employee/employee-edit.component";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forRoot([
+      {path: 'employeeList' ,component:EmployeeListComponent},
       {path: 'employeeAdd' ,component:EmployeeComponent},
-      {path: 'employeeList' ,component:EmployeeListComponent}
+      {path: 'employeeEdit/:id',component:EmployeeEditComponent}
+      
     ])
   ],
   declarations: [],
