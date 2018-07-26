@@ -1,6 +1,6 @@
 [
     {
-        "employeeId":1,
+        "id":1,
         "firstName":"Haiku",
         "lastName":"Thakkar",
         "email":"haiku@promactinfo.com",
@@ -14,7 +14,7 @@
         "language":"C/C++"
     },
     {
-        "employeeId":2,
+        "id":2,
         "firstName":"Jhon",
         "lastName":"Doe",
         "email":"jhon@promactinfo.com",
@@ -28,7 +28,7 @@
         "language":"C/C++,PHP"
     },
     {
-        "employeeId":3,
+        "id":3,
         "firstName":"Hammerson",
         "lastName":"Rake",
         "email":"hammerson@promactinfo.com",

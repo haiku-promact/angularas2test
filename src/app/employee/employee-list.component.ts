@@ -15,11 +15,20 @@ export class EmployeeListComponent implements OnInit{
 
     employees: IEmployee[];
 
-    constructor( private _employeeService:EmployeeService){}
+    constructor( private employeeService:EmployeeService){}
 
     ngOnInit(): void {
-        this._employeeService.getEmployees()
+        this.employeeService.getEmployees()
             .subscribe(employees => this.employees=employees);            
         
-    } 
+    }
+    
+    delete(employee :IEmployee):void{
+        if(confirm(`you really want to delete:${employee.firstName}?`)){
+        this.employees=this.employees.filter(e => e !== employee);
+        this.employeeService.deleteEmployee(employee).subscribe();
+    }
+}
+
+    
 }

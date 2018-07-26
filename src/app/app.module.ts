@@ -8,6 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeModule } from './employee/employee.module';
 import { AppRoutingModule } from './app-routing.module';
 
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { EmployeeData } from './employee/employee-data';
+
+
 
 
 @NgModule({
@@ -21,7 +25,9 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     FormsModule,  
-   
+    HttpClientInMemoryWebApiModule.forRoot(
+      EmployeeData, { dataEncapsulation: false },
+    ),
     ReactiveFormsModule,
     AppRoutingModule,    
     EmployeeModule

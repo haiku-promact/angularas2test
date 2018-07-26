@@ -12,6 +12,7 @@ import { EmployeeEditComponent } from "./employee/employee-edit.component";
   imports: [
     CommonModule,
     RouterModule.forRoot([
+      {path: '' ,component:EmployeeListComponent},
       {path: 'employeeList' ,component:EmployeeListComponent},
       {path: 'employeeAdd' ,component:EmployeeComponent},
       {path: 'employeeEdit/:id',component:EmployeeEditComponent}

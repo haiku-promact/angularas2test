@@ -1,6 +1,6 @@
 <div >
     <button class='btn btn-warning'>
-        <a [routerLink]="['/employeeEdit',0]">Add New Employee</a></button>
+        <a [routerLink]="['/employeeAdd']">Add New Employee</a></button>
 </div><br>
 
 <div class='panel panel-primary'>
@@ -43,11 +43,11 @@
                         <td>{{employee.language}}</td>
                         <td>
                            
-                              <a class="btn btn-primary" [routerLink]="['/employeeEdit',employee.employeeId]"> Edit</a>
+                              <a class="btn btn-primary" [routerLink]="['/employeeEdit',employee.id]"> Edit</a>
                                                      
                         </td>
                         <td>
-                            <button class="btn btn-danger" >Delete</button>
+                            <button class="btn btn-danger" (click)="delete(employee)" >Delete</button>
                         </td>
                     </tr>
                 </tbody>

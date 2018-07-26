@@ -1,90 +1,73 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 
 
 import { IEmployee } from './employee';
 
-@Injectable()
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+@Injectable({providedIn:'root'})
 export class EmployeeService{
-     employeedata: any[]= [{
-        "employeeId":1,
-        "firstName":"Haiku",
-        "lastName":"Thakkar",
-        "email":"haiku@promactinfo.com",
-        "contactNumber":9876543210,
-        "address":"5,asd,vadodadra",
-        "userName":"haikuT",
-        "password":"qwerty",
-        "gender":"female",
-        "qualification":"B.E",
-        "experience":"1.5 year",
-        "language":"C/C++"
-    },
-    {
-        "employeeId":2,
-        "firstName":"Jhon",
-        "lastName":"Doe",
-        "email":"jhon@promactinfo.com",
-        "contactNumber":986543210,
-        "address":"9,qwe,vadodadra",
-        "userName":"jhonD",
-        "password":"qwerty12345",
-        "gender":"male",
-        "qualification":"M.E",
-        "experience":"2 year",
-        "language":"C/C++,PHP"
-    },
-    {
-        "employeeId":3,
-        "firstName":"Hammerson",
-        "lastName":"Rake",
-        "email":"hammerson@promactinfo.com",
-        "contactNumber":6589543210,
-        "address":"5,asd,L.A",
-        "userName":"R.hamson",
-        "password":"notyourbusiness",
-        "gender":"male",
-        "qualification":"MCA",
-        "experience":"1 year",
-        "language":"C/C++,JAVA,PHP"
-    }];
+   
+    private employeeUrl='api/employees';
 
-    constructor(){}
+    constructor(private http: HttpClient) {}
+               
+         getEmployees():Observable<IEmployee[]>{
+             return this.http.get<IEmployee[]>(this.employeeUrl).pipe(
+                 tap(employees => console.log('fetched employees')),
+                 catchError(this.handleError('getEmployees',[]))
+             )
+         }
 
-    getEmployees() :Observable<IEmployee[]>{
-        return of (this.employeedata);
-    }
+         getEmployee(id: number):Observable<IEmployee>{
+             const url = `${this.employeeUrl}/${id}`;
+             return this.http.get<IEmployee>(url).pipe(
+                 tap(_=>console.log(`fetched employee id=${id}`))
+             )
+         }
+        
+          //delete hero
 
-    getEmployee(id:number){
-        return
-    }
+          deleteEmployee(employee:IEmployee |number ):Observable<IEmployee>{
+            const id =typeof employee === 'number'? employee:employee.id;
+            const url= `${this.employeeUrl}/${id}`;
 
-    // getEmployees():Observable<IEmployee[]>{
-    //     return this._http.get<IEmployee[]>(this._employeeUrl).pipe(
-    //     tap(data => console.log('All:' +JSON.stringify(data))),
-    //     catchError(this.handleError));
-    // }
+            return this.http.delete<IEmployee>(url,httpOptions).pipe(
+                tap(_=> console.log(`Deleted employee id =${id}`)),
+                catchError(this.handleError<IEmployee>('deleteEmployee'))
+            );
+          }
 
-    // getEmployee(id:number){
-    //     return this.getEmployees().pipe(
-    //         map((employees:IEmployee[])=>
-    //         employees.find(e=>e.employeeId===id)));
-    // }
+          updateEmployee(employee:IEmployee):Observable<IEmployee>{
+              return this.http.put(this.employeeUrl,employee,httpOptions).pipe(
+                tap(_ => console.log(`Updated employee id= ${employee.id}`)),
+                catchError(this.handleError<any>(`updateEmployee`))
+              );
+          }
 
-    // private handleError(err:HttpErrorResponse){
-    //     let errorMessage='';
-
-    //     if(err.error instanceof Error){
-    //         errorMessage=`An error occourred: ${err.error.message}`;
-    //     }
-    //     else{
-    //         errorMessage=`Server returned code: ${err.status},error message is: ${err.message}`;
-
-    //     }
-    //     console.error(errorMessage);
-    //     return Observable.throw(errorMessage);
-    // }   
-            
+          addEmployee(employee:IEmployee):Observable<IEmployee>{
+            return this.http.post<IEmployee>(this.employeeUrl,employee,httpOptions).pipe(
+                tap((employee:IEmployee)=>console.log(`added hero with id=${employee.id}`)),
+                catchError(this.handleError<IEmployee>('addEmployee'))
+            );
+          }
+          
+         private handleError<T> (operation = 'operation', result?: T) {
+            return (error: any): Observable<T> => {
+         
+              // TODO: send the error to remote logging infrastructure
+              console.error(error); // log to console instead
+         
+              // TODO: better job of transforming error for user consumption
+              console.log(`${operation} failed: ${error.message}`);
+         
+              // Let the app keep running by returning an empty result.
+              return of(result as T);
+            };
+          } 
 }
