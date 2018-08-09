@@ -65,7 +65,7 @@ export class EmployeeEditComponent implements OnInit{
   getEmployee():void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.employeeService.getEmployee(id)
-      .subscribe(employee => this.employee = employee)
+      .subscribe(employee => this.employee = employee);
   }
 
   goBack():void{

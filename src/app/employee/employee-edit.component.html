@@ -67,14 +67,24 @@
 
 <label>Language</label><br>
    
-<div class="form-group">
+<!-- <div class="form-group">
     <span *ngFor="let l of lang" >
         <input type="checkbox"  name="language"
          [(ngModel)]="l.isEnabled"
           (change)="onChange(l.languageName, $event.target.checked)">
            {{l.languageName}}<br>
     </span>  
+</div> -->
+
+<div class="form-group">
+    <label>Language</label>
+    <div class="form-check" *ngFor="let l of lang">
+        <input class="form-check-input" [(ngModel)]="l.isEnable" (change)="onChange(l.languageName, $event.target.checked)" name="{{ l.languageName }}" type="checkbox" id="{{l.languageName}}">
+            {{l.languageName}}
+    </div>
 </div>
+
+
 <button class="btn btn-primary" type="submit" (click)="save()">Save</button>&nbsp;
 <button class="btn btn-primary" (click)=goBack()>Back</button>&nbsp;
 <button class="btn btn-primary">Clear</button>&nbsp;

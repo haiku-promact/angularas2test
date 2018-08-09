@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { EmployeeData } from './employee/employee-data';
+import { EmployeeSearchComponent } from './employee/employee-search.component';
 
 
 
@@ -17,6 +18,7 @@ import { EmployeeData } from './employee/employee-data';
 @NgModule({
   declarations: [
     AppComponent,
+    EmployeeSearchComponent
     
     
     

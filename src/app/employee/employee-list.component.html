@@ -1,13 +1,13 @@
 <div >
-    <button class='btn btn-warning'>
-        <a [routerLink]="['/employeeAdd']">Add New Employee</a></button>
+    <button class='btn btn-success'>
+        <a [routerLink]="['/employeeAdd']" style='color:white;text-decoration: none;'>Add New Employee</a></button>
 </div><br>
 
 <div class='panel panel-primary'>
-    <div class='panel-heading'>
+    <div class='panel-heading' style="width: 100%;text-align:center;font-size: 2em; ">
         {{pageTitle}}
     </div>
-    
+
     <div class='table-responsive'>
         <table class='table'
             *ngIf='employees && employees.length'>
@@ -42,16 +42,16 @@
                         <td>{{employee.experience}}</td>
                         <td>{{employee.language}}</td>
                         <td>
-                           
+
                               <a class="btn btn-primary" [routerLink]="['/employeeEdit',employee.id]"> Edit</a>
-                                                     
+
                         </td>
                         <td>
                             <button class="btn btn-danger" (click)="delete(employee)" >Delete</button>
                         </td>
                     </tr>
                 </tbody>
-            
+
         </table>
     </div>
 </div>

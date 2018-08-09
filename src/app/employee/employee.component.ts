@@ -69,7 +69,8 @@ export class EmployeeComponent implements OnInit {
       gender:string,
       qualification:string,
       experience:string,
-      language:[string])
+      //language:[string]
+    )
       :void{
     firstName=firstName;
     lastName=lastName;
@@ -81,8 +82,8 @@ export class EmployeeComponent implements OnInit {
     gender=gender;
     qualification=qualification;
     experience=experience;
-    language[]=language[];
-    this.employeeService.addEmployee({firstName ,lastName,email,contactNumber,address,userName,password,gender,qualification, experience, language:[]} as IEmployee)
+    //language=language;
+    this.employeeService.addEmployee({firstName ,lastName,email,contactNumber,address,userName,password,gender,qualification, experience} as IEmployee)
       .subscribe(employee=>{
         this.employees.push(employee);
       });

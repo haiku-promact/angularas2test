@@ -18,7 +18,7 @@ import { EmployeeEditComponent } from './employee-edit.component';
     declarations:[
         EmployeeListComponent,
         EmployeeComponent,
-        EmployeeEditComponent
+        EmployeeEditComponent,
     ],
 
     providers:[

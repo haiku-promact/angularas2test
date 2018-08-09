@@ -70,4 +70,15 @@ export class EmployeeService{
               return of(result as T);
             };
           } 
+
+          searchEmployees(term: string): Observable<IEmployee[]> {
+            if (!term.trim()) {
+              // if not search term, return empty hero array.
+              return of([]);
+            }
+            return this.http.get<IEmployee[]>(`${this.employeeUrl}/?firstName=${term}`).pipe(
+              tap(_ => console.log(`found employee matching "${term}"`)),
+              catchError(this.handleError<IEmployee[]>('searchEmployees', []))
+            );
+          }
 }
